@@ -29,18 +29,17 @@ for price in prices:
         # print(title_price)
         prices_list.append(title_price)
 
+reviews_list = []
+for review in reviews:
+    if isinstance(review, bs4.element.Tag) and hasattr(review, 'string') and review.string is not None:
+        title_review = review.string
+        reviews_list.append(title_review)
 
-# for review in reviews:
-#     if isinstance(review, bs4.element.Tag) and hasattr(review, 'string') and review.string is not None:
-#         print(review.string)
-#
-# for review in reviews:
-#     if isinstance(review, bs4.element.Tag) and hasattr(review, 'string') and review.string is not None:
-#         print(review.string)
-#
-# for description in descriptions:
-#     if isinstance(description, bs4.element.Tag) and hasattr(description, 'string') and description.string is not None:
-#         print(description.string)
-#
-table = pd.DataFrame({'Product Name':product_name_list, 'price': prices_list, })
+descriptions_list = []
+for description in descriptions:
+    if isinstance(description, bs4.element.Tag) and hasattr(description, 'string') and description.string is not None:
+        title_description = description.string
+        descriptions_list.append(title_description)
+
+table = pd.DataFrame({'Product Name':product_name_list, 'Description': descriptions_list,'Price': prices_list,'Review': reviews_list })
 print(table)
